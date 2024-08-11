@@ -32,15 +32,19 @@ docker-compose up
 
 The `extract_data.py` script extracts data from an S3 bucket and passes it to the next task.
 
-### 2. Perform EDA
+### 2. Check Anomalies
+
+The `check_anomalies.py` script analyzes the extracted data for any anomalies outside of the expected data distribution.
+
+### 3. Perform EDA
 
 The `perform_eda.py` script performs exploratory data analysis on the extracted data and pushes the EDA results to XCom.
 
-### 3. Create Visualizations
+### 4. Create Visualizations
 
-The `create_visualizations.py` script generates visualizations based on the EDA results to XCom
+The `visualizations` folder has various scripts that generates visualizations like data distribution, certain ratios across categories, etc. to XCom
 
-### 4. Load to S3
+### 5. Load to S3
 
 The `load_to_s3.py` script loads various data files, tables, visualizations, and EDA results to S3.
 
@@ -53,10 +57,16 @@ The `load_to_s3.py` script loads various data files, tables, visualizations, and
 |   └── s3_config.yaml
 ├── dags/
 │   └── operators/
-│       ├── extract_data_operator.py
-│       ├── perform_eda_operator.py
-│       ├── create_visualizations_operator.py
-│       └── load_to_s3_operator.py
+│       └── visualizations/
+│           └── visualize_categorical_columns.py
+│           └── visualize_class_distribution.py
+│           └── visualize_distance_from_home.py
+│           └── visualize_distance_from_last_transaction.py
+│           └── visualize_ratio_to_median_purchase_price.py
+│       ├── check_anomalies.py
+│       ├── extract_data.py
+│       ├── perform_eda.py
+│       └── load_to_s3.py
 |   ├── fraud_detection_dag.py
 ├── images/
 │   └── Airflow_DAG.png
